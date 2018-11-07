@@ -1,0 +1,20 @@
+<launch>
+	<!-- [We resume the logic in empty_world.launch, changing only the name of the world to be launched] -->
+	<arg name="gui" default="true"/>
+	<arg name="file" default="mailbox"/>
+	<arg name="joint_limits_released" default="0"/>
+
+
+	
+	<include file="$(find gazebo_ros)/launch/empty_world.launch">
+		<arg name="gui" value="$(arg gui)"/>
+	</include>
+
+
+	<param name="robot_description" command="$(find xacro)/xacro.py '$(find allegro_kuka_description)/models/allegro_hand_on_kuka.urdf.xacro'" /> 
+
+
+	<node name="spawn_urdf" pkg="gazebo_ros" type="spawn_model" args="-param robot_description -urdf -model arm_base" />
+
+
+</launch>

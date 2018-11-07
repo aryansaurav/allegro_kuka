@@ -1,0 +1,19 @@
+<launch>
+  <!-- We resume the logic in empty_world.launch, changing only the name of the world to be launched -->
+  <include file="$(find gazebo_ros)/launch/empty_world.launch">
+    <arg name="world_name" value="$(find allegro_hand_gazebo)/worlds/allegro_hand_objects.world"/>
+    <!-- more default parameters can be changed here -->
+  </include>
+
+    <include file="$(find spacenav_node)/launch/classic.launch"/>
+
+
+
+<!-- Spawn a robot into Gazebo -->
+
+<param name="robot_description" command="$(find xacro)/xacro.py '$(find allegro_hand_description_nico)/models/allegro_hand_only_sensors.urdf.xacro'" />
+<node name="spawn_urdf" pkg="gazebo_ros" type="spawn_model" args="-param robot_description -urdf -model ahand" />
+<!-- rosrun gazebo_ros spawn_model -param robot_description -urdf -model ahand -->
+
+
+</launch>

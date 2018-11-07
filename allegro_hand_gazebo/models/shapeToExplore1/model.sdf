@@ -1,0 +1,75 @@
+<?xml version='1.0'?>
+<sdf version='1.4'>
+
+
+
+  <model name ="support_total">
+   <static>true</static>
+   <pose>0.0 0.0 0.0 0 0 0</pose>
+
+
+   <link name ='planch'>
+    <pose>0 0 0   0 0 0</pose>
+    <collision name ='collision'>
+      <geometry><box><size>0.7 0.7 0.02</size></box></geometry>
+   </collision>
+   <visual name ='visual'>
+     <geometry><box><size>0.7 0.7 0.02</size></box></geometry>
+     <material>
+      <script>
+       <uri>file://media/materials/scripts/gazebo.material</uri>
+       <name>Gazebo/Wood</name>
+     </script>
+   </material>
+ </visual>
+</link>
+
+
+<link name ='sphere2'>
+  <pose>0 0.1 0.01 0 0 0</pose>
+  <collision name ='collision'>
+         <!-- <geometry><box><size>0.02 0.02 0.03</size></box></geometry> -->
+   <geometry><sphere><radius>0.01</radius></sphere></geometry>
+ </collision>
+ <visual name ='visual'>
+   <geometry><sphere><radius>0.01</radius></sphere></geometry>
+            <!-- <geometry><box><size>0.02 0.02 0.03</size></box></geometry> -->
+
+   <material>
+    <script>
+     <uri>file://media/materials/scripts/gazebo.material</uri>
+     <name>Gazebo/Wood</name>
+   </script>
+ </material>
+</visual>
+</link>
+
+
+
+
+
+<!-- 
+<link name="handle">
+  <pose>0.0 -0.1 0.0 0 0.0 0.0</pose>
+
+  <collision name="collision">
+    <geometry>
+      <mesh>
+        <uri>model://door_handle/meshes/door_handle.dae</uri>
+      </mesh>
+    </geometry>
+  </collision>
+  <visual name="visual">
+    <geometry>
+      <mesh>
+        <uri>model://door_handle/meshes/door_handle.dae</uri>
+      </mesh>
+    </geometry>
+  </visual>
+</link> -->
+
+
+
+
+</model>
+</sdf>

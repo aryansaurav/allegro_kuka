@@ -1,0 +1,80 @@
+<?xml version='1.0'?>
+<sdf version='1.4'>
+
+
+
+  <model name ="support_total">
+   <static>true</static>
+   <pose>0.0 0.0 0.0 0 0 0</pose>
+
+
+<link name ='sphere1'>
+  <pose>0 0.05 0.06 0 0 0</pose>
+  <collision name ='collision'>
+   <geometry><sphere><radius>0.15</radius></sphere></geometry>
+ </collision>
+ <visual name ='visual'>   <transparency>0.0</transparency>
+   <geometry><sphere><radius>0.15</radius></sphere></geometry>
+   <material>
+    <script>
+     <uri>file://media/materials/scripts/gazebo.material</uri>
+     <name>Gazebo/Wood</name>
+   </script>
+ </material>
+</visual>
+</link>
+
+
+<link name ='sphere2'>
+  <pose>0 -0.1 0 0 0 0</pose>
+  <collision name ='collision'>
+   <geometry><sphere><radius>0.2</radius></sphere></geometry>
+ </collision>
+ <visual name ='visual'><transparency>0.0</transparency>
+   <geometry><sphere><radius>0.2</radius></sphere></geometry>
+   <material>
+    <script>
+     <uri>file://media/materials/scripts/gazebo.material</uri>
+     <name>Gazebo/Wood</name>
+   </script>
+ </material>
+</visual>
+</link>
+
+<link name ='sphere3'>
+  <pose>0 -0.25 0.03 0 0 0</pose>
+  <collision name ='collision'>
+   <geometry><sphere><radius>0.20</radius></sphere></geometry>
+ </collision>
+ <visual name ='visual'><transparency>0.0</transparency>
+   <geometry><sphere><radius>0.20</radius></sphere></geometry>
+   <material>
+    <script>
+     <uri>file://media/materials/scripts/gazebo.material</uri>
+     <name>Gazebo/Wood</name>
+   </script>
+ </material>
+</visual>
+</link>
+
+
+<link name ='sphere4'>
+  <pose>0 0.05 0.16 0 0 0</pose>
+  <collision name ='collision'>
+   <geometry><sphere><radius>0.10</radius></sphere></geometry>
+ </collision>
+ <visual name ='visual'><transparency>0.0</transparency>
+   <geometry><sphere><radius>0.10</radius></sphere></geometry>
+   <material>
+    <script>
+     <uri>file://media/materials/scripts/gazebo.material</uri>
+     <name>Gazebo/Wood</name>
+   </script>
+ </material>
+</visual>
+</link>
+
+
+
+</model>
+</sdf>

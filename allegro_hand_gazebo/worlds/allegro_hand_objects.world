@@ -1,0 +1,164 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<sdf version="1.4">
+	<world name="default">
+    <gui fullscreen='0'>
+      <camera name='gzclient_camera'>
+        <pose frame=''>0.59 -0.3 0.4 0 0.4 2.7</pose>
+        <view_controller>orbit</view_controller>
+        <projection_type>perspective</projection_type>
+      </camera>
+    </gui>
+    <physics type="ode">
+      <!-- <gravity>0.000000 0.000000 -9.8100</gravity> -->
+      <gravity>0.000000 0.000000 0.00</gravity>
+      <ode>
+        <solver>
+         <type>quick</type>
+         <iters>50</iters>
+         <precon_iters>0</precon_iters>
+         <sor>1.300000</sor>
+       </solver>
+       <constraints>
+         <!--cfm>0.000100</cfm--> 	<!-- cfm: Between 0.0001 and 0.001 works well (0.001 allows a bit too much elasticity)-->
+         <!--erp>0.100000</erp-->
+         <!--contact_max_correcting_vel>10.0000</contact_max_correcting_vel--> 	<!-- contact_max_correcting_vel: 	Max vel that contacts can generate-->
+         <!--contact_surface_layer>0.001000</contact_surface_layer--> 			<!-- contact_surface_layer: 		Increasing  may improve sensibility-->
+       </constraints>
+     </ode>
+     <max_contacts>1</max_contacts>
+     <!--real_time_update_rate>0.001</real_time_update_rate-->
+     <!--max_step_size>0.001000</max_step_size-->
+   </physics>
+
+
+   <include>
+     <uri>model://sun</uri>
+   </include>
+
+
+   <model name ='table'>
+     <static>true</static>
+     <pose>0 0 0.01 0 0 0</pose>
+     <link name ='table_link'>
+      <pose>0 0 0 0 0 0</pose>
+      <collision name ='collision'>
+       <geometry>
+        <box><size>3 3 0.019</size></box>
+      </geometry>
+    </collision>
+    <visual name ='visual'>
+     <geometry>
+      <box><size>3 3  0.019</size></box>
+    </geometry>
+
+
+    <material><script><uri>file://media/materials/scripts/gazebo.material</uri>
+    <name>Gazebo/Wood</name></script></material>
+  </visual>
+
+</link>
+</model>
+
+
+<model name ='support'>
+ <static>true</static>
+ <pose>0.0 0 0.03 0 0 0</pose>
+ <link name ='table_link'>
+  <pose>0 0 0 0 0 0</pose>
+  <collision name ='collision'>
+   <geometry><box><size>0.5 0.5 0.01</size></box></geometry>
+   <surface>
+    <friction><ode><mu>0.1</mu><mu2>0.1</mu2></ode></friction>
+    <contact><ode><kp>400000</kp></ode></contact>
+  </surface>
+</collision>
+<visual name ='visual'>
+ <geometry>
+  <box><size>0.5 0.5 0.01</size></box>
+</geometry>
+
+<material><script><uri>file://media/materials/scripts/gazebo.material</uri>
+<name>Gazebo/Residential</name></script></material>
+</visual>
+
+</link>
+</model>
+
+
+<!-- OBJECT TO GRASP -->
+<!-- it has a plugin to have an impedance -->
+<model name="cylinderHandle">
+  <pose>0.057 0.0 0.157 1.577 0 0</pose>
+  <static>false</static>
+  <link name="left_wheel">
+    <pose>0 0 0 0 0 0</pose>
+
+    <collision name="collision">
+      <geometry>
+        <cylinder>
+          <radius>.03</radius>
+          <length>.2</length>
+        </cylinder>
+      </geometry>
+    </collision>
+
+    <inertial>
+      <mass>5</mass>
+      <inertia>
+        <ixx>0.015</ixx>
+        <ixy>0</ixy>
+        <ixz>0</ixz>
+        <iyy>0.015</iyy>
+        <iyz>0</iyz>
+        <izz>0.001</izz>
+      </inertia>
+    </inertial>
+
+    <visual name="visual">
+      <geometry>
+        <cylinder>
+          <radius>.03</radius>
+          <length>0.2</length>
+        </cylinder>S
+      </geometry>
+      <material><script><uri>file://media/materials/scripts/gazebo.material</uri>
+      <name>Gazebo/Wood</name></script></material>
+    </visual>
+  </link>
+
+  <plugin name="my_object_impedance_plugin" filename="libmy_object_impedance_plugin.so" >
+    <topicName> /gazebo/object_impedance2 </topicName>    
+    <bodyNames>left_wheel</bodyNames>
+    <resetThreshold>0.02</resetThreshold>
+  </plugin>
+
+  <plugin name="mylinkforce2" filename="libgazebo_ros_force2.so">
+    <bodyNames>left_wheel</bodyNames>
+  </plugin>
+
+</model>
+
+
+<!-- weird little shape to grasp. -->
+<model name="shapetoExplore3">
+  <pose>0.60 -0.08 0.21 0.0 1.57 0</pose>
+  <include>
+    <uri>model://shapeToExplore3</uri>
+  </include>
+  <plugin name="my_object_impedance_plugin" filename="libmy_object_impedance_plugin.so" >
+    <topicName> /gazebo/object_impedance </topicName>    
+    <bodyNames> shapetoExplore3::sphere1 </bodyNames>
+    <resetThreshold>0.02</resetThreshold>
+  </plugin>
+
+    <plugin name="mylinkforce2" filename="libgazebo_ros_force2.so">
+    <bodyNames>shapetoExplore3::sphere1</bodyNames>
+  </plugin>
+</model>
+
+
+
+
+
+</world>
+</sdf>

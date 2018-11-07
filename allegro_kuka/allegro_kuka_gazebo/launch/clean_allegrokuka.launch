@@ -1,0 +1,5 @@
+<launch>
+	<!-- Delete robot from gazebo -->
+  <node pkg="rosservice" type="rosservice" name="delete_model" args="call gazebo/delete_model '{model_name: arm_base}'"/>
+
+</launch>
